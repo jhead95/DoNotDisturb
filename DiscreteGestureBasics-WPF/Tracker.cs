@@ -72,9 +72,12 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             {
                 this.standingTime = this.standingTime.Add(this.sw.Elapsed);
             }
-            ledStrip.refresh((int)this.sittingTime.TotalSeconds);
-            this.avg = 0F;
-            this.avgLen = 0;
+
+            if ((int)this.sittingTime.TotalSeconds >= ledStrip.maxDuration/ledStrip.ledQuantity)
+            {
+                ledStrip.writeData("6");
+                this.reset();
+            }
             this.sw.Restart();
         }
 

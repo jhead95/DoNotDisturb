@@ -161,6 +161,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         /// <param name="e">event arguments</param>
         private void Reader_GestureFrameArrived(object sender, VisualGestureBuilderFrameArrivedEventArgs e)
         {
+            float highScore = 0;
             VisualGestureBuilderFrameReference frameReference = e.FrameReference;
             using (VisualGestureBuilderFrame frame = frameReference.AcquireFrame())
             {
@@ -183,13 +184,14 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                                 {
                                     // update the GestureResultView object with new gesture result values
                                     this.GestureResultView.UpdateGestureResult(true, result.Detected, result.Confidence);
-                                    tracker.addConfidence(result.Confidence);
+                                    highScore = result.Confidence > highScore ? result.Confidence : highScore;
                                 }
                             }
                         }
                     }
                 }
             }
+            tracker.addConfidence(highScore);
         }
 
         /// <summary>

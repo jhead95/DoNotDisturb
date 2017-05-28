@@ -6,15 +6,15 @@ class LedController
 {
     SerialPort serialport;
     //number of leds on strip
-    int ledQuantity;
+    public int ledQuantity;
     //LED strip becomes 100% at this time (in seconds)
-    int maxDuration;
+    public int maxDuration;
         
     public LedController(int ledQuantity, int maxDuration)
     {
         serialport = new SerialPort();
         serialport.BaudRate = 9600;
-        serialport.PortName = "COM3";
+        serialport.PortName = "COM9";
         this.ledQuantity = ledQuantity;
         this.maxDuration = maxDuration;
     }
@@ -22,17 +22,19 @@ class LedController
     public void refresh(int seconds)
     {
         int ledIncrement = maxDuration / ledQuantity;
-        int x = seconds / ledIncrement;
-        x = x > ledQuantity ? ledQuantity : x;
-        this.writeData(x.ToString());
+        
+        if (seconds >= ledIncrement)
+        {
+            int x = seconds / ledIncrement;
+            x = x > ledQuantity ? ledQuantity : x;
+            this.writeData(x.ToString());
+        }
     }
 
-    private void writeData(String data)
+    public void writeData(String data)
     {
-        if (serialport.IsOpen)
-        {
-            serialport.Close();
-        }
+        while (serialport.IsOpen) { };
+
         serialport.Open();
         serialport.Write(data);
         serialport.Close();
