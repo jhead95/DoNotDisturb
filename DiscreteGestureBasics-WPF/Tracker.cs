@@ -17,7 +17,10 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         float avg;
         int avgLen;
         Stopwatch sw;
-        int swIncrement;
+        const int SWINCREMENT = 1000;
+        LedController ledStrip;
+        const int LEDMAXDURATION = 12;
+        const int LEDQUANTITY = 6;
         
         
 
@@ -30,7 +33,10 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             this.confThreshold = 0.5F;
             this.sw = new Stopwatch();
             this.sw.Start();
-            int swIncrement = 1000;
+            ledStrip = new LedController(LEDQUANTITY, LEDMAXDURATION);
+            ledStrip.refresh(0);
+
+
         }
         public Tracker(float confThreshold)
         {
@@ -41,7 +47,8 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             this.confThreshold = confThreshold;
             this.sw = new Stopwatch();
             this.sw.Start();
-            this.swIncrement = 1000;
+            ledStrip = new LedController(LEDQUANTITY, LEDMAXDURATION);
+            ledStrip.refresh(0);
 
         }
 
@@ -49,7 +56,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
         {
             this.avg = ((this.avg * this.avgLen) + confidence) / (this.avgLen + 1);
             this.avgLen++;
-            if (sw.ElapsedMilliseconds >= swIncrement)
+            if (sw.ElapsedMilliseconds >= SWINCREMENT)
             {
                 update();
             }
@@ -65,7 +72,9 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             {
                 this.standingTime = this.standingTime.Add(this.sw.Elapsed);
             }
-            Console.WriteLine(this.toString());
+            ledStrip.refresh((int)this.sittingTime.TotalSeconds);
+            this.avg = 0F;
+            this.avgLen = 0;
             this.sw.Restart();
         }
 
@@ -75,6 +84,14 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             output += "Sitting time:  " + this.sittingTime + Environment.NewLine;
             output += "Standing time:  " + this.standingTime + Environment.NewLine;
             return output;
+        }
+
+        public void reset()
+        {
+            this.sittingTime = new TimeSpan();
+            this.standingTime = new TimeSpan();
+            this.avg = 0F;
+            this.avgLen = 0;
         }
 
 

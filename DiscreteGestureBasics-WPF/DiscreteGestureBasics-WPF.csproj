@@ -98,6 +98,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ClientController.cs" />
+    <Compile Include="LedController.cs" />
+    <Compile Include="ServerController.cs" />
     <Compile Include="Tracker.cs" />
     <Compile Include="GestureDetector.cs" />
     <Compile Include="GestureResultView.cs" />
