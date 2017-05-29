@@ -2,7 +2,7 @@ int latchPin = 10;
 int clockPin = 11;
 int dataPin = 9;
 
-int currentPoints = 0;
+int currentPoints;
 
 int incomingByte = 0;
 
@@ -12,6 +12,15 @@ void setup(){
   pinMode(latchPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
   pinMode(dataPin, OUTPUT);
+  currentPoints = 0;
+  Serial.write(currentPoints);
+  Serial.write(currentPoints);
+  Serial.write(currentPoints);
+  Serial.write(currentPoints);
+  Serial.write(currentPoints);
+  Serial.write(currentPoints);
+  Serial.write(currentPoints);
+  Serial.write(currentPoints);
   startUpSequence();
 }
 
@@ -26,6 +35,8 @@ void startUpSequence(){
   updateShiftRegister(7);
   delay(delayTime);
   updateShiftRegister(15);
+  delay(delayTime);
+  updateShiftRegister(31);
   delay(delayTime);
   updateShiftRegister(63);
   delay(delayTime);
@@ -64,15 +75,18 @@ int power(int value, int y){
 void loop(){
   if(Serial.available() > 0){
     incomingByte = Serial.read() - 53;
-    Serial.print(" I received: ");
-    Serial.println(incomingByte);
-    if(currentPoints+incomingByte > 6){
+    //Serial.print(" I received: ");
+    //Serial.println(incomingByte);
+    
+    if(currentPoints+incomingByte >= 6){
       currentPoints=6;
-    } else if(currentPoints+incomingByte < 0){
+    } else if(currentPoints+incomingByte <= 0){
       currentPoints = 0;
     } else{
       currentPoints += incomingByte;
     }
+    //delay(10);
+    Serial.write(currentPoints);
     
     
     //delay(10);
