@@ -83,6 +83,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             this.kinectBodyViewbox.DataContext = this.kinectBodyView;
 
             // create a gesture detector for each body (6 bodies => 6 detectors) and create content controls to display results in the UI
+            Tracker testTracker = new Tracker();
             int col0Row = 0;
             int col1Row = 0;
             int maxBodies = this.kinectSensor.BodyFrameSource.BodyCount;

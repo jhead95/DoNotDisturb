@@ -34,7 +34,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             this.sw = new Stopwatch();
             this.sw.Start();
             ledStrip = new LedController(LEDQUANTITY, LEDMAXDURATION);
-            ledStrip.refresh(0);
+            //ledStrip.refresh(0);
 
 
         }
@@ -48,7 +48,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
             this.sw = new Stopwatch();
             this.sw.Start();
             ledStrip = new LedController(LEDQUANTITY, LEDMAXDURATION);
-            ledStrip.refresh(0);
+            //ledStrip.refresh(0);
 
         }
 
