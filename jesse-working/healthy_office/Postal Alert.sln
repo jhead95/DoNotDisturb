@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{F3B3740B-B9DB-2DC8-E6FF-42B7CEB40658}") = "Postal Alert", "Assembly-CSharp.csproj", "{3C7EDDCD-6D5A-44EB-9A62-89F36CA4F427}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C7EDDCD-6D5A-44EB-9A62-89F36CA4F427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7EDDCD-6D5A-44EB-9A62-89F36CA4F427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7EDDCD-6D5A-44EB-9A62-89F36CA4F427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7EDDCD-6D5A-44EB-9A62-89F36CA4F427}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

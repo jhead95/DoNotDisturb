@@ -26,7 +26,7 @@ public class movements : MonoBehaviour {
     bool isSolid;
 
 
-
+    
 
 
 
@@ -53,17 +53,27 @@ public class movements : MonoBehaviour {
 
 	}
 
-	// Update is called once per frame
+	
 	void Update () {
+
+        // Reset functions
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SendSerial.sendAndReceive("00");
+        }
+
         //***********************************//
 
-        if (Input.GetKey ("up")) { 
+        if (Input.GetKey(KeyCode.W)) {
+
+            print("W");
+
 			contactPoint1 = true;
 		} else {
 			contactPoint1 = false;
@@ -71,40 +81,45 @@ public class movements : MonoBehaviour {
 
 		// ********************************* //
 
-		if (Input.GetKey ("down")) { 
-			contactPoint2 = true;
+		if (Input.GetKey(KeyCode.A)) {
+            print("A");
+            contactPoint2 = true;
 		} else {
 			contactPoint2 = false;
 		}
 
 		// ********************************* //
 
-		if (Input.GetKey ("left")) { 
-			contactPoint3 = true;
+		if (Input.GetKey(KeyCode.S)) {
+            print("S");
+            contactPoint3 = true;
 		} else {
 			contactPoint3 = false;
 		}
 
 		// ********************************* //
 
-		if (Input.GetKey ("right")) { 
-			contactPoint4 = true;
+		if (Input.GetKey(KeyCode.D)) {
+            print("D");
+            contactPoint4 = true;
 		} else {
 			contactPoint4 = false;
 		}
 
 		// ********************************* //
 
-		if (Input.GetKey ("space")) { 
-			contactPoint5 = true;
+		if (Input.GetKey(KeyCode.F)) {
+            print("F");
+            contactPoint5 = true;
 		} else {
 			contactPoint5 = false;
 		}
 
 		// ********************************* //
 
-		if (Input.GetMouseButton(0)) { 
-			contactPoint6 = true;
+		if (Input.GetKey(KeyCode.G)) {
+            print("G");
+            contactPoint6 = true;
 		} else {
 			contactPoint6 = false;
 		}
@@ -163,7 +178,9 @@ public class movements : MonoBehaviour {
 
 					addToStretchCount ();
 
-					playStartAudio ();
+                    SendSerial.sendAndReceive("3");
+
+                    playStartAudio ();
 
 					//*****************************//
 
@@ -273,7 +290,9 @@ public class movements : MonoBehaviour {
 
 					addToStretchCount ();
 
-					stretchToBeDone = 3;
+                    SendSerial.sendAndReceive("3");
+
+                    stretchToBeDone = 3;
 
 					playStartAudio ();
 
@@ -386,13 +405,17 @@ public class movements : MonoBehaviour {
 
 					addToStretchCount ();
 
-					stretchToBeDone = 0;
+                    SendSerial.sendAndReceive("3");
+
+                    stretchToBeDone = 0;
 
 					playStartAudio ();
 
-					//*****************************//
+                    time_sitting.setRunning();
 
-					animator.SetInteger("movementInt", 33);
+                    //*****************************//
+
+                    animator.SetInteger("movementInt", 33);
 
 					//*************************************//
 
@@ -512,6 +535,8 @@ public class movements : MonoBehaviour {
                     stretchToBeDone = 5;
 
                     addToStretchCount();
+
+                    SendSerial.sendAndReceive("3");
 
                     playStartAudio();
 
@@ -634,6 +659,8 @@ public class movements : MonoBehaviour {
 
                     addToStretchCount();
 
+                    SendSerial.sendAndReceive("3");
+
                     stretchToBeDone = 6;
 
                     playStartAudio();
@@ -748,7 +775,11 @@ public class movements : MonoBehaviour {
 
                     addToStretchCount();
 
+                    SendSerial.sendAndReceive("3");
+
                     stretchToBeDone = 0;
+
+                    time_sitting.setRunning();
 
                     playStartAudio();
 
@@ -865,6 +896,8 @@ public class movements : MonoBehaviour {
 
                     addToStretchCount();
 
+                    SendSerial.sendAndReceive("3");
+
                     playStartAudio();
 
                     //*****************************//
@@ -968,6 +1001,8 @@ public class movements : MonoBehaviour {
                     timerIsGoing = false;
 
                     addToStretchCount();
+
+                    SendSerial.sendAndReceive("3");
 
                     stretchToBeDone = 9;
 
@@ -1077,7 +1112,11 @@ public class movements : MonoBehaviour {
 
                     addToStretchCount();
 
+                    SendSerial.sendAndReceive("3");
+
                     stretchToBeDone = 0;
+
+                    time_sitting.setRunning();
 
                     playStartAudio();
 

@@ -48,11 +48,11 @@ public class countdown : MonoBehaviour {
 
                 //SendSerial.sendAndReceive("2");
 
-				GameObject theDude = GameObject.Find("Y_Bot");
+				/*GameObject theDude = GameObject.Find("Y_Bot");
 				movements transClass = (movements) theDude.GetComponent(typeof(movements));
-				transClass.changeTheDude();
+				transClass.changeTheDude();*/
 
-
+            
 
 
 			}
