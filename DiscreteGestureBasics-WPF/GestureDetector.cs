@@ -191,7 +191,7 @@ namespace Microsoft.Samples.Kinect.DiscreteGestureBasics
                     }
                 }
             }
-            tracker.addConfidence(highScore);
+            tracker.addConfidenceID(highScore, this.vgbFrameSource.TrackingId);
         }
 
         /// <summary>

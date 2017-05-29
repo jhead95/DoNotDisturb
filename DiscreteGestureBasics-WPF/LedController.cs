@@ -14,10 +14,11 @@ class LedController
     {
         serialport = new SerialPort();
         serialport.BaudRate = 9600;
-        serialport.PortName = "COM3";
+        serialport.PortName = "COM9";
         new Task(() => { resetBuffer(); }).Start();
         this.ledQuantity = ledQuantity;
         this.maxDuration = maxDuration;
+        //resetBuffer();
 
         //reset();
     }
@@ -43,21 +44,27 @@ class LedController
     {
         //Just a neater wrapper method, fires asynchronously now
         new Task(() => { writeDataAsync(data); }).Start();
+        //Console.WriteLine("writeData");
     }
 
     void resetBuffer()
     {
         try
         {
-            serialport.Open();
-            serialport.DiscardInBuffer();
-            serialport.DiscardOutBuffer();
-            serialport.Close();
+            //serialport.Open();
+            //serialport.DiscardInBuffer();
+            //serialport.DiscardOutBuffer();
+            //serialport.Close();
         } catch
         {
-            Task.Delay(10);
-            new Task(() => { resetBuffer(); }).Start();
+            //Task.Delay(100);
+            //new Task(() => { resetBuffer(); }).Start();
         }
+    }
+
+    void forceClose()
+    {
+        serialport.Close();
     }
 
     void writeDataAsync(String data)
@@ -65,6 +72,8 @@ class LedController
         try
         {
             serialport.Open();
+            serialport.DiscardInBuffer();
+            serialport.DiscardOutBuffer();
             serialport.Write(data);
             //Task.Delay(10);
             Console.WriteLine("Arduino says: " + serialport.ReadByte());
@@ -73,7 +82,7 @@ class LedController
         }
         catch
         {
-            Task.Delay(10);
+            System.Threading.Thread.Sleep(100);
             new Task(() => { writeDataAsync(data); }).Start();
         }
     }
